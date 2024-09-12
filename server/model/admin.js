@@ -1,11 +1,11 @@
-import { connectToDDBB } from './connection.js'
+import { connectionConfig } from './config.js'
+import mysql from 'mysql2/promise.js'
 
-export class AdministratorModel {
+export class AdminModel {
   static async create ({ input }) {
-    const connection = await connectToDDBB()
-    console.log(connection)
+    const connection = await mysql.createConnection(connectionConfig)
     const query = 'INSERT INTO Administrator(name, lastname, email, password, prefix, cellphone, birthdate) VALUES (?, ?, ?, ?, ?, ?, ?)'
     const values = [input.name, input.lastname, input.email, input.password, input.prefix, input.cellphone, input.birthdate]
-    return await connection.query(query, values).then(() => connection.end())
+    return await connection.query(query, values)
   }
 }

@@ -3,11 +3,11 @@ POST http://localhost:3000/admin/signup
 Content-Type: application/json
 
 {
-    "email": "danielayizet@gmail.com",
+    "email": "danielayizeeeet@gmail.com",
     "password": "123456",
     "name": "Daniela",
     "lastname": "Zapata Barahona",
     "prefix": "57",
-    "cellphone": "3192860986",
+    "cellphone": "3192860946",
     "birthdate" : "2003-10-03"
 }

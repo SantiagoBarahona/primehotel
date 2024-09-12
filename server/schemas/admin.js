@@ -1,6 +1,6 @@
 import z from 'zod'
 
-const administratorSchema = z.object({
+const adminSchema = z.object({
   email: z.string({
     invalid_type_error: 'El email debe ser un string',
     required_error: 'El email es requerido'
@@ -14,10 +14,10 @@ const administratorSchema = z.object({
   portrait: z.optional()
 })
 
-export function validatePartialAdministrator (object) {
-  return administratorSchema.partial().safeParse(object) // Partial: vueleve todas las validaciones opcionales
+export function validatePartialAdmin (object) {
+  return adminSchema.partial().safeParse(object) // Partial: vueleve todas las validaciones opcionales
 }
 
-export function validateAdministrator (object) {
-  return administratorSchema.safeParse(object)
+export function validateAdmin (object) {
+  return adminSchema.safeParse(object)
 }

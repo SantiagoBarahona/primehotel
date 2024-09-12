@@ -1,8 +1,8 @@
-import { RegisterAdministratorForm } from "./components/RegisterAdministratorForm";
+import { RegisterAdminForm } from "./components/RegisterAdminForm";
 
 
 export function App() {
   return (
-    <RegisterAdministratorForm />
+    <RegisterAdminForm />
   )
 }
