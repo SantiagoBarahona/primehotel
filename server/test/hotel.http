@@ -1,0 +1,7 @@
+### Create hotel
+POST http://localhost:3000/hotel
+Content-Type: application/json
+
+{
+    "name": "GranHotel5"
+}

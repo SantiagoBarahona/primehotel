@@ -1,9 +1,9 @@
 import { useState } from "react"
 import PhoneInput from "react-phone-number-input"
 import "react-phone-number-input/style.css"
-import "./RegisterAdminForm.css"
+import "./AdminSignupForm.css"
 
-export function RegisterAdminForm() {
+export function AdminSignupForm() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -41,9 +41,9 @@ export function RegisterAdminForm() {
         setBirthdate(date)
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         event.preventDefault()
-        fetch('http://localhost:3000/admin/signup', {
+        await fetch('http://localhost:3000/register/admin', {
             method: 'POST',
             headers: {
                 "Content-type": "application/json"
@@ -51,14 +51,18 @@ export function RegisterAdminForm() {
             body: JSON.stringify({ email, password, name, lastname, prefix, cellphone, birthdate })
         })
             .then(res => res.json())
-            .then(data => alert(JSON.stringify(data)))
+            .then(data => {
+                // TODO MEJORAR ESTO
+                // IF CODE = 200 || CODE = 400
+                alert(JSON.stringify(data))
+            })
     }
 
     return (
 
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <img className="mx-auto w-auto" src="/logo-icon.png" alt="Your Company" style={{ height: '100px' }} />
+                <img className="mx-auto w-auto" src="/logo-icon.png" alt="Primehotel logo" style={{ height: '100px' }} />
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up into our page</h2>
             </div>
 

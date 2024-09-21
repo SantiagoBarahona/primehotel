@@ -11,3 +11,12 @@ Content-Type: application/json
     "cellphone": "3192860946",
     "birthdate" : "2003-10-03"
 }
+
+### Loggear admin
+POST http://localhost:3000/admin/login
+Content-Type: application/json
+
+{
+    "email": "danielayizeeeet@gmail.com",
+    "password": "123456"
+}

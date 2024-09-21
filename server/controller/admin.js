@@ -1,5 +1,7 @@
+import { SALT_ROUNDS } from '../config.js'
 import { AdminModel } from '../model/admin.js'
 import { validateAdmin } from '../schemas/admin.js'
+import bcrypt from 'bcrypt'
 
 export class AdminController {
   static async create (req, res) {
@@ -7,8 +9,13 @@ export class AdminController {
     if (!result.success) {
       return res.status(400).json({ error: JSON.parse(result.error.message) })
     }
-    console.log(result.data)
-    await AdminModel.create({ input: result.data })
+    const validatedInput = result.data
+    const hashedPassword = await bcrypt.hash(validatedInput.password, SALT_ROUNDS)
+    const data = {
+      ...validatedInput,
+      password: hashedPassword
+    }
+    await AdminModel.create({ input: data })
       .then(() => {
         return res.status(201).json({ message: 'Administrator created successfully' })
       })
