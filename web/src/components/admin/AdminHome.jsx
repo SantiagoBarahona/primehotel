@@ -1,36 +1,45 @@
 import { Outlet, Link } from "react-router-dom";
+import AccountMenu from "../account-menu/AccountMenu";
+import useAuth from "../../hooks/useAuth";
+import { Button, Typography } from "@mui/material";
+import AdminAside from "./AdminAside";
 
 export function AdminHome() {
 
+    const [auth] = useAuth()
 
     return (
-        <div className="flex">
-            <aside className="bg-slate-500 w-80 min-h-full">
+        <div className="grid grid-cols-5">
+            <aside
+                className="bg-backgroundAside col-span1 h-screen overflow-scroll">
                 <ul>
                     <li>
-                        <Link>
-                            <button>My hotels</button>
+                        <Link to="/admin/hotels">
+                            <AdminAside />
                         </Link>
                     </li>
                 </ul>
             </aside>
-            <main className="bg-slate-200 h-screen w-full">
-                <header className="bg-red-500 mt-2 h-16 flex flex-row-reverse items-center">
-                    <div className="mr-10">Profile</div>
-                    <div className="mr-10">
+            <main className="bg-backgroundMain col-span-4 h-screen">
+                <header className="mt-2 h-16 flex flex-row-reverse items-center">
+                    <div className="mr-4">
+                        <AccountMenu name={auth.name + " " + auth.lastname} portrait={auth.portrait} />
+                    </div>
+                    <div className="mr-4">
                         <Link to="create-hotel">
-                            <button
-                                className="rounded-md bg-indigo-600 px-5 py-3 text-xl font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                CREATE HOTEL
-                            </button>
+                            <Button variant="contained">
+                                <Typography>
+                                    CREATE HOTEL
+                                </Typography>
+                            </Button>
                         </Link>
                     </div>
                 </header>
-                <div className="bg-slate-100 w-full max-h-screen">
-                    <Outlet className="bg-fuchsia-400 w-full h-full"></Outlet>
+                <div className="w-full max-h-screen overflow-scroll">
+                    <Outlet className="w-full max-h-full"></Outlet>
                 </div>
             </main>
-        </div>
+        </div >
 
 
     )

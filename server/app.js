@@ -1,4 +1,4 @@
-import express, { json, urlencoded } from 'express'
+import express, { json } from 'express'
 import cors from 'cors'
 import { PORT, WEB_APP_URL } from './config.js'
 import { verifyJWT } from './middleware/verifyJWT.js'
@@ -8,6 +8,7 @@ import { hotelRouter } from './routes/hotel.js'
 import { authRouter } from './routes/auth.js'
 import { registerRouter } from './routes/register.js'
 import { refreshRouter } from './routes/refresh.js'
+import handleLogout from './controller/auth/logout.js'
 
 const app = express()
 
@@ -20,8 +21,8 @@ app.use(cors({
   ],
   credentials: true
 })) // TODO MEJORAR CORS
-app.use(urlencoded()) // TODO DELETE THIS
 app.use(cookieParser())
+app.get('/logout', handleLogout)
 app.use('/register', registerRouter)
 app.use('/auth', authRouter)
 app.use('/refresh', refreshRouter)

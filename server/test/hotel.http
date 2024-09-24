@@ -3,5 +3,6 @@ POST http://localhost:3000/hotel
 Content-Type: application/json
 
 {
-    "name": "GranHotel5"
+    "adminId": "1",
+    "name": "GranHoteleeees"
 }

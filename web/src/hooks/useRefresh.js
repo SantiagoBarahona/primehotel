@@ -10,9 +10,9 @@ export function useRefresh(){
             withCredentials: true,
         })
         setAuth(prev => {
-            return { ...prev, accessToken: response.data.accessToken}
+            return { ...prev, ...response.data}
         })
-        return response.data.accessToken
+        return response.data
     }
 
     return refresh

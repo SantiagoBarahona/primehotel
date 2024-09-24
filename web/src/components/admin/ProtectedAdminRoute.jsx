@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { useRefresh } from "../../hooks/useRefresh";
+import { Backdrop } from '@mui/material';
 
 export default function ProtectedAdminRoute({ children }) {
 
@@ -16,15 +17,14 @@ export default function ProtectedAdminRoute({ children }) {
     useEffect(() => {
         const verifyRefreshToken = async () => {
             try {
-                const refreshToken = await refresh()
-                setAuth(prev => {
-                    return ({ ...prev, refreshToken: refreshToken })
-                })
-                if (!auth.accessToken) {
+                const newAuth = await refresh()
+                if (!newAuth.accessToken) {
                     return navigate("/admin/signin")
                 }
+                setAuth(newAuth)
             } catch (err) {
                 console.log(err)
+                return navigate("/admin/signin")
             } finally {
                 setIsLoading(false)
             }
@@ -34,7 +34,10 @@ export default function ProtectedAdminRoute({ children }) {
 
     return (
         isLoading ?
-            <h1>Loading</h1>
+            <Backdrop
+                sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+                open={isLoading}
+            />
             : children
     )
 }

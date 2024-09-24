@@ -1,72 +1,106 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate"
+import { useLocation } from "react-router-dom"
+import { Alert, Button, Rating, TextField, Typography } from "@mui/material"
+import { useHotels } from "../../hooks/useHotels"
 
-export function CreateHotel() {
+export function CreateHotel({ edit = false }) {
 
-    const [hotelName, setHotelName] = useState('')
+    const location = useLocation()
+    const [hotelName, setHotelName] = useState(location.state?.hotel.name)
+    const [address, setAddress] = useState(location.state?.hotel.address)
+    const [phone, setPhone] = useState(location.state?.hotel.phone)
+    const [rating, setRating] = useState(3)
     const [error, setError] = useState(false)
-    const navigate = useNavigate()
-    const axiosPrivate = useAxiosPrivate()
+    const { createHotel, updateHotel } = useHotels()
 
-    const handleChange = () => {
+    const handleNameChange = () => {
         setHotelName(event.target.value)
+        setError(false)
     }
 
-    const hanldeSubmit = async () => {
+    const handleAddressChange = () => {
+        setAddress(event.target.value)
+    }
+
+    const handlePhoneChange = () => {
+        setPhone(event.target.value)
+    }
+
+    const hanldeCreate = async () => {
         event.preventDefault()
-        const response = await axiosPrivate.post(
-            'http://localhost:3000/hotel',
-            { name: hotelName }
-        )
-        console.log(response)
-        if (response.status == 200)
-            navigate("/admin/create-hotel-success")
-        if (response.status == 400)
+        const status = await createHotel(hotelName, address, phone, rating)
+        if (status === 400) {
+            setError(true)
+        }
+
+    }
+
+    const handleUpdate = async () => {
+        event.preventDefault()
+        const status = await updateHotel(location.state.hotel.id, hotelName, address, phone, rating)
+        if (status == 400)
             setError(true)
 
     }
 
-    const getInputClassname = () => {
-        return error ?
-            "block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-red-300 placeholder:text-gray-400 focus:border-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
-            :
-            "block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-    }
-
     return (
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="bg-almostWhite-100 flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Enter the following data</h2>
+                <h2
+                    className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black">
+                    {edit ? "Edit your hotel data" : "Enter the following data"}
+                </h2>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form className="space-y-6">
                     <div>
-                        <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                            Hotel name
-                        </label>
-                        <div className="mt-2">
-                            <input
-                                id="name"
+                        <div className="mt-3">
+                            <TextField
+                                label="Hotel name"
                                 name="name"
-                                type="text"
                                 required
-                                onChange={handleChange}
-                                className={getInputClassname()}
+                                defaultValue={edit ? location.state.hotel.name : ''}
+                                onChange={handleNameChange}
+                                className="w-full"
+                            />
+                            {error && <Alert severity="error">This name has already been chosen!</Alert>}
+                        </div>
+                        <div className="mt-3 flex justify-center">
+                            <Typography component="legend">Hotel rating: </Typography>
+                            <Rating required onChange={(event, newValue) => { setRating(newValue) }} />
+                        </div>
+                        <div className="mt-3">
+                            <TextField
+                                label="Address"
+                                name="address"
+                                defaultValue={edit ? location.state.hotel.address : ''}
+                                required
+                                onChange={handleAddressChange}
+                                className="w-full"
                             />
                         </div>
-                        {error && <p className="text-red-500 text-sm">This name has already been chosen!</p>}
+                        <div className="mt-3">
+                            <TextField
+                                label="Hotel phone number"
+                                name="phone"
+                                required
+                                defaultValue={edit ? location.state.hotel.phone : ''}
+                                onChange={handlePhoneChange}
+                                className="w-full"
+                            />
+                        </div>
                     </div>
 
                     <div>
-                        <button
+                        <Button
                             type="submit"
-                            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            onClick={hanldeSubmit}
+                            className="w-full"
+                            variant="contained"
+                            onClick={edit ? handleUpdate : hanldeCreate}
                         >
-                            Create
-                        </button>
+                            {edit ? "UPDATE" : "CREATE"}
+                        </Button>
                     </div>
                 </form>
             </div>
