@@ -3,6 +3,7 @@ import { HotelController } from '../controller/hotel.js'
 export const hotelRouter = Router()
 
 hotelRouter.post('', HotelController.create)
-hotelRouter.get('/:adminId', HotelController.getAll)
-hotelRouter.patch('/:adminId/:hotelId', HotelController.update)
-hotelRouter.delete('/:adminId/:hotelId', HotelController.delete)
+hotelRouter.get('', HotelController.getAll)
+hotelRouter.get('/:hotelId', HotelController.getById)
+hotelRouter.patch('/:hotelId', HotelController.update)
+hotelRouter.delete('/:hotelId', HotelController.delete)

@@ -6,15 +6,18 @@ import useAuth from "../../hooks/useAuth"
 export function AdminSignin() {
 
     const [email, setEmail] = useState('')
+    const [error, setError] = useState(false)
     const [password, setPassword] = useState('')
     const [, setAuth] = useAuth('')
     const navigate = useNavigate()
 
     const handleEmailChange = ({ target: { value } }) => {
+        setError(false)
         setEmail(value)
     }
 
     const handlePasswordChange = ({ target: { value } }) => {
+        setError(false)
         setPassword(value)
     }
 
@@ -30,7 +33,8 @@ export function AdminSignin() {
             setAuth(response.data)
             navigate('/admin')
         } catch (err) {
-            console.log(err.message)
+            if (err.status == 400)
+                setError(true)
         }
     }
     return (
@@ -80,6 +84,13 @@ export function AdminSignin() {
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
+                        </div>
+
+                        <div>
+                            {error &&
+                                <p
+                                    className="text-red-500 text-center"
+                                >Invalid email or passrowd</p>}
                         </div>
 
                         <div>

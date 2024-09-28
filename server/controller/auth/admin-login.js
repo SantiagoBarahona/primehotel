@@ -1,4 +1,4 @@
-import { SECRET_JWT_KEY, SECRET_JWT_REFRESH_KEY } from '../../config.js'
+import { ACCESS_TOKEN_EXPIRATION_TIME, REFRESH_TOKEN_EXPIRATION_TIME, SECRET_JWT_KEY, SECRET_JWT_REFRESH_KEY } from '../../config.js'
 import { AdminModel } from '../../model/admin.js'
 import { validatePartialAdmin } from '../../schemas/admin.js'
 import jwt from 'jsonwebtoken'
@@ -10,11 +10,11 @@ export async function handleAdminLogin (req, res) {
       const accessToken = jwt.sign(
         publicUser,
         SECRET_JWT_KEY,
-        { expiresIn: '30s' })
+        { expiresIn: ACCESS_TOKEN_EXPIRATION_TIME })
       const refreshToken = jwt.sign(
         publicUser,
         SECRET_JWT_REFRESH_KEY,
-        { expiresIn: '1d' }
+        { expiresIn: REFRESH_TOKEN_EXPIRATION_TIME }
       )
       res
         .cookie('refresh_token', refreshToken, {

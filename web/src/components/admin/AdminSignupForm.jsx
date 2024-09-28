@@ -63,13 +63,13 @@ export function AdminSignupForm() {
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <img className="mx-auto w-auto" src="/logo-icon.png" alt="Primehotel logo" style={{ height: '100px' }} />
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up into our page</h2>
+                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">Sign up into our page</h2>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form className="space-y-6" action="/login" method="POST">
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                        <label htmlFor="email" className="block text-sm font-medium leading-6 ">Email address</label>
                         <div className="mt-2">
                             <input
                                 id="email"
@@ -77,14 +77,14 @@ export function AdminSignupForm() {
                                 type="email"
                                 autoComplete="email"
                                 required
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 onChange={handleEmailChange}
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium leading-6 ">Password</label>
                         <div className="mt-2">
                             <input
                                 id="password"
@@ -93,13 +93,13 @@ export function AdminSignupForm() {
                                 type="password"
                                 autoComplete="current-password"
                                 required
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                     </div>
 
                     <div className="flex justify-between">
                         <div>
-                            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                            <label htmlFor="name" className="block text-sm font-medium leading-6 ">Name</label>
                             <div className="mt-2">
                                 <input
                                     id="name"
@@ -108,12 +108,12 @@ export function AdminSignupForm() {
                                     type="text"
                                     autoComplete="current-password"
                                     required
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
 
                         <div className="flex-grow ml-1">
-                            <label htmlFor="lastname" className="block text-sm font-medium leading-6 text-gray-900">Lastname</label>
+                            <label htmlFor="lastname" className="block text-sm font-medium leading-6 ">Lastname</label>
                             <div className="mt-2">
                                 <input
                                     id="lastname"
@@ -122,18 +122,19 @@ export function AdminSignupForm() {
                                     type="text"
                                     autoComplete="current-password"
                                     required
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
                     </div>
 
                     <div className="flex">
                         <div className="flex flex-col justify-center">
-                            <label htmlFor="cellphone" className="block text-sm font-medium leading-6 text-gray-900">Cellphone</label>
+                            <label htmlFor="cellphone" className="block text-sm font-medium leading-6 ">Cellphone</label>
                             <div className="mt-2">
                                 <PhoneInput
                                     id="cellphone"
                                     name="cellphone"
+                                    className="text-black"
                                     onChange={handleCellphoneChange}
                                     placeholder="Enter cellphone number"
                                     international={true}
@@ -143,14 +144,14 @@ export function AdminSignupForm() {
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="date" className="block text-sm font-medium leading-6 text-gray-900">Select your birthdate</label>
+                            <label htmlFor="date" className="block text-sm font-medium leading-6 ">Select your birthdate</label>
                             <div className="mt-2">
                                 <input
                                     id="date"
                                     type="date"
                                     name="date"
                                     onChange={handleDateChange}
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>

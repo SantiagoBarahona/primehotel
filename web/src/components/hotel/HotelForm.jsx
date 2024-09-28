@@ -1,11 +1,13 @@
 import { useState } from "react"
-import { useLocation } from "react-router-dom"
-import { Alert, Button, Rating, TextField, Typography } from "@mui/material"
+import { useLocation, useNavigate } from "react-router-dom"
+import { Alert, Button, Chip, Rating, TextField, Typography } from "@mui/material"
 import { useHotels } from "../../hooks/useHotels"
+import ArrowBack from "@mui/icons-material/ArrowBack"
 
-export function CreateHotel({ edit = false }) {
+export default function HotelForm({ edit = false }) {
 
     const location = useLocation()
+    const navigate = useNavigate()
     const [hotelName, setHotelName] = useState(location.state?.hotel.name)
     const [address, setAddress] = useState(location.state?.hotel.address)
     const [phone, setPhone] = useState(location.state?.hotel.phone)
@@ -43,13 +45,30 @@ export function CreateHotel({ edit = false }) {
 
     }
 
+    const handleBack = () => {
+        navigate(-1)
+    }
+
     return (
-        <div className="bg-almostWhite-100 flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex flex-col justify-center">
+
+            <div>
+                <Button
+                    sx={{ display: "inline", top: 0, width: "fit-content" }}
+                    onClick={handleBack}
+                >
+                    <ArrowBack />
+                </Button>
+
+                <Chip label={edit ? "Edit hotel" : "Create hotel"} sx={{ width: "fit-content" }} />
+            </div>
+
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2
-                    className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black">
+                <Typography
+                    variant="h4"
+                >
                     {edit ? "Edit your hotel data" : "Enter the following data"}
-                </h2>
+                </Typography>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -68,7 +87,11 @@ export function CreateHotel({ edit = false }) {
                         </div>
                         <div className="mt-3 flex justify-center">
                             <Typography component="legend">Hotel rating: </Typography>
-                            <Rating required onChange={(event, newValue) => { setRating(newValue) }} />
+                            <Rating
+                                required
+                                onChange={(event, newValue) => { setRating(newValue) }}
+                                defaultValue={rating}
+                            />
                         </div>
                         <div className="mt-3">
                             <TextField
@@ -104,7 +127,7 @@ export function CreateHotel({ edit = false }) {
                     </div>
                 </form>
             </div>
-        </div>
+        </div >
     )
 }
 

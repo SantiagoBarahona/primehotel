@@ -11,7 +11,7 @@ export class HotelModel {
     await DDBBConnection.query(query2, values2)
   }
 
-  static async getAll (input) {
+  static async getAll (adminId) {
     const query = ` 
     SELECT h.*
     FROM Hotel h
@@ -19,8 +19,20 @@ export class HotelModel {
     JOIN Administrator a ON axh.id_administrator = a.id
     WHERE a.id = ?;
     `
-    const results = await DDBBConnection.execute(query, [input.adminId])
+    const results = await DDBBConnection.execute(query, [adminId])
     return results[0]
+  }
+
+  static async getById (adminId, hotelId) {
+    const query = `
+    SELECT h.*
+    FROM Hotel h
+    JOIN AdministratorxHotel axh ON h.id = axh.id_hotel
+    JOIN Administrator a ON axh.id_administrator = a.id
+    WHERE a.id = ? AND h.id = ?;
+    `
+    const results = await DDBBConnection.execute(query, [adminId, hotelId])
+    return results[0][0]
   }
 
   static async update (input) {

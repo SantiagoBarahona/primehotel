@@ -9,6 +9,7 @@ import { authRouter } from './routes/auth.js'
 import { registerRouter } from './routes/register.js'
 import { refreshRouter } from './routes/refresh.js'
 import handleLogout from './controller/auth/logout.js'
+import { employeeRouter } from './routes/employee.js'
 
 const app = express()
 
@@ -31,6 +32,7 @@ app.use('/refresh', refreshRouter)
 app.use(verifyJWT)
 app.use('/admin', adminRouter)
 app.use('/hotel', hotelRouter)
+app.use('/employee', employeeRouter)
 
 app.listen(PORT, () => {
   console.log(`App listening on http://localhost:${PORT}`)

@@ -1,0 +1,9 @@
+### Delete other admin hotels
+GET http://localhost:3000/hotel
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IlNhbnRpYWdvIiwibGFzdG5hbWUiOiJaYXBhdGEiLCJlbWFpbCI6Imxsc2FudGhpYWdvQGdtYWlsLmNvbSIsInByZWZpeCI6IjU3IiwiY2VsbHBob25lIjoiMzE5Mjg2MDk4OCIsImJpcnRoZGF0ZSI6IjIwMDMtMDMtMTBUMDU6MDA6MDAuMDAwWiIsInBvcnRyYWl0IjpudWxsLCJpYXQiOjE3MjcyMzUzMjYsImV4cCI6MTcyNzMyMTcyNn0.aPKE1nq_wuE-y5Y53C1xVh7ZFrrTXE96SCMD9ui-v0c
+Content-Type: application/json
+
+{
+    "adminId":"1",
+    "hotelId":"1"
+}

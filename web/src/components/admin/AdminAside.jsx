@@ -8,25 +8,18 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { BsBuilding } from "react-icons/bs";
 import { IconContext } from 'react-icons/lib';
 import { useState } from 'react';
-import { useHotels } from '../../hooks/useHotels.js'
+import HotelList from '../hotel/HotelList';
 
 export default function AdminAside() {
 
     const [open, setOpen] = useState(true);
-    const { hotels } = useHotels()
 
     const handleClick = () => {
         setOpen(!open);
     };
 
-
-
     return (
-        <>
-            <header className='flex justify-center items-center mt-4 mb-4'>
-                <i><img src='/logo-icon.png' className='w-12'></img></i>
-                <h1 className='text-white text-2xl'><strong>Prime hotel</strong></h1>
-            </header>
+        <aside className="w-full h-screen overflow-scroll">
             <List
                 sx={{ width: '100%', color: '#fff' }}
                 component="nav">
@@ -40,16 +33,10 @@ export default function AdminAside() {
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        {hotels.map(hotel =>
-                            <ListItemButton sx={{ pl: 4 }} key={hotel.id}>
-                                <ListItemText primary={hotel.name} />
-                            </ListItemButton>
-                        )}
-                    </List>
+                    <HotelList />
                 </Collapse>
             </List>
-        </>
+        </aside>
 
     );
 }

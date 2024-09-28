@@ -7,14 +7,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        backgroundAside: "#141414",
-        backgroundMain: "#282828",
+        almostBlack: {
+          100: "#0D0D0D",
+          200: "#141414",
+          300: "#282828",
+          400: '#2f2f2f'
+        },
         almostWhite: {
           100:"#efefef",
           200:"#dfdfdf",
           300:"#bfbfbf"
+        },
+        almostBlue: {
+          100: "#2196F3"
         }
-      }
+      },
     },
   },
   plugins: [],

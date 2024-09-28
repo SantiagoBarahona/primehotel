@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { SECRET_JWT_KEY, SECRET_JWT_REFRESH_KEY } from '../../config.js'
+import { ACCESS_TOKEN_EXPIRATION_TIME, SECRET_JWT_KEY, SECRET_JWT_REFRESH_KEY } from '../../config.js'
 
 export const handleRefreshToken = async (req, res) => {
   const cookies = req.cookies
@@ -10,13 +10,14 @@ export const handleRefreshToken = async (req, res) => {
     refreshToken,
     SECRET_JWT_REFRESH_KEY,
     (err, decoded) => {
+      const { iat, exp, ...newDecoded } = decoded
       if (err) return res.sendStatus(403)
       const accessToken = jwt.sign(
-        { decoded },
+        newDecoded,
         SECRET_JWT_KEY,
-        { expiresIn: '10s' }
+        { expiresIn: ACCESS_TOKEN_EXPIRATION_TIME }
       )
-      res.json({ accessToken, ...decoded })
+      res.json({ accessToken, ...newDecoded })
     }
   )
 }

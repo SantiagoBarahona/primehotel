@@ -8,11 +8,20 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import SnackbarProvider from './context/SnackbarProvider.jsx';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 createRoot(document.getElementById('root')).render(
   <AuthProvider>
-    <SnackbarProvider>
-      <RouterProvider router={adminRouter} />
-    </SnackbarProvider>
+    <ThemeProvider theme={darkTheme}>
+      <SnackbarProvider>
+        <RouterProvider router={adminRouter} />
+      </SnackbarProvider>
+    </ThemeProvider>
   </AuthProvider >
 )
