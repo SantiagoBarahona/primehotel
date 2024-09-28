@@ -1,2 +1,2 @@
-# primehotel
+# Primehotel
 Application for hotel managment
